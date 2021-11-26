@@ -50,14 +50,14 @@ def promote(update: Update, context: CallbackContext) -> str:
         not (promoter.can_promote_members or promoter.status == "creator")
         and user.id not in DRAGONS
     ):
-        message.reply_text("You don't have the necessary rights to do that!")
+        message.reply_text("У вас нет на это необходимых прав!")
         return
 
     user_id = extract_user(message, args)
 
     if not user_id:
         message.reply_text(
-            "You don't seem to be referring to a user or the ID specified is incorrect.."
+            "Похоже, вы не имеете в виду пользователя или указан неверный идентификатор.."
         )
         return
 
@@ -67,11 +67,11 @@ def promote(update: Update, context: CallbackContext) -> str:
         return
 
     if user_member.status == "administrator" or user_member.status == "creator":
-        message.reply_text("How am I meant to promote someone that's already an admin?")
+        message.reply_text("Как я должен повышать кого-то, кто уже является администратором?")
         return
 
     if user_id == bot.id:
-        message.reply_text("I can't promote myself! Get an admin to do it for me.")
+        message.reply_text("Я не могу повышать себя! Получите админа, чтобы сделать это для меня")
         return
 
     # set same perms as bot - bot can't assign higher perms than itself!
@@ -92,9 +92,9 @@ def promote(update: Update, context: CallbackContext) -> str:
         )
     except BadRequest as err:
         if err.message == "User_not_mutual_contact":
-            message.reply_text("I can't promote someone who isn't in the group.")
+            message.reply_text("Я не могу повышать кого-то, кто не в группе.")
         else:
-            message.reply_text("An error occured while promoting.")
+            message.reply_text("Произошла ошибка при повышение.")
         return
 
     bot.sendMessage(
@@ -130,12 +130,12 @@ def demote(update: Update, context: CallbackContext) -> str:
     user_id = extract_user(message, args)
 
     if user_can_promote(chat, user, context.bot.id) is False:
-        message.reply_text("You don't have enough rights to demote someone!")
+        message.reply_text("У вас недостаточно прав, чтобы кого-то понизить!")
         return ""
 
     if not user_id:
         message.reply_text(
-            "You don't seem to be referring to a user or the ID specified is incorrect.."
+            "Похоже, вы не имеете в виду пользователя или указан неверный идентификатор.."
         )
         return
 
@@ -145,15 +145,16 @@ def demote(update: Update, context: CallbackContext) -> str:
         return
 
     if user_member.status == "creator":
-        message.reply_text("This person CREATED the chat, how would I demote them?")
+        message.reply_text("Этот человек СОЗДАЛ чат, как бы мне его понизить в должности?")
         return
 
     if not user_member.status == "administrator":
-        message.reply_text("Can't demote what wasn't promoted!")
+        message.reply_text("Не возможно понизить. Возможно, я не являюсь админом, или статус админа был назначен другим пользователем, поэтому я не могу действовать в соответствии с ними!"
+")
         return
 
     if user_id == bot.id:
-        message.reply_text("I can't demote myself! Get an admin to do it for me.")
+        message.reply_text("Я не могу понизить себя!")
         return
 
     try:
@@ -186,8 +187,8 @@ def demote(update: Update, context: CallbackContext) -> str:
         return log_message
     except BadRequest:
         message.reply_text(
-            "Could not demote. I might not be admin, or the admin status was appointed by another"
-            " user, so I can't act upon them!"
+            "Не удалось понизить с должности. Я мог не быть админом, или статус админа назначил другой"
+            " пользователь, поэтому я не могу действовать в соответствии с ними!"
         )
         return
 
@@ -200,7 +201,7 @@ def refresh_admin(update, _):
     except KeyError:
         pass
 
-    update.effective_message.reply_text("Admins cache refreshed!")
+    update.effective_message.reply_text("Кеш администратора обновлен!")
 
 
 @run_async
@@ -223,41 +224,41 @@ def set_title(update: Update, context: CallbackContext):
 
     if not user_id:
         message.reply_text(
-            "You don't seem to be referring to a user or the ID specified is incorrect.."
+            "Похоже, вы не имеете в виду пользователя или указан неверный идентификатор.."
         )
         return
 
     if user_member.status == "creator":
         message.reply_text(
-            "This person CREATED the chat, how can i set custom title for him?"
+            "Этот человек СОЗДАЛ чат, как мне установить для него индивидуальный заголовок?"
         )
         return
 
     if user_member.status != "administrator":
         message.reply_text(
-            "Can't set title for non-admins!\nPromote them first to set custom title!"
+            "Невозможно установить заголовок для пользователей, не являющихся администраторами! \nПродвигайте их сначала, чтобы установить собственный заголовок!"
         )
         return
 
     if user_id == bot.id:
         message.reply_text(
-            "I can't set my own title myself! Get the one who made me admin to do it for me."
+            "Я не могу установить собственное название! Пусть тот, кто сделал меня админом, сделает это за меня.."
         )
         return
 
     if not title:
-        message.reply_text("Setting blank title doesn't do anything!")
+        message.reply_text("Установка пустого заголовка ничего не делает!")
         return
 
     if len(title) > 16:
         message.reply_text(
-            "The title length is longer than 16 characters.\nTruncating it to 16 characters."
+            "Длина заголовка превышает 16 символов. \nУрезание до 16 символов.."
         )
 
     try:
         bot.setChatAdministratorCustomTitle(chat.id, user_id, title)
     except BadRequest:
-        message.reply_text("I can't set custom title for admins that I didn't promote!")
+        message.reply_text("Я не могу установить индивидуальный заголовок для админов, которых я повышал!")
         return
 
     bot.sendMessage(
@@ -278,7 +279,7 @@ def setchatpic(update, context):
     user = update.effective_user
 
     if user_can_changeinfo(chat, user, context.bot.id) is False:
-        msg.reply_text("You are missing right to change group info!")
+        msg.reply_text("У вас нет права на изменение информации о группе!")
         return
 
     if msg.reply_to_message:
@@ -287,7 +288,7 @@ def setchatpic(update, context):
         elif msg.reply_to_message.document:
             pic_id = msg.reply_to_message.document.file_id
         else:
-            msg.reply_text("You can only set some photo as chat pic!")
+            msg.reply_text("Вы можете установить только фото в качестве картинки для чата!")
             return
         dlmsg = msg.reply_text("Just a sec...")
         tpic = context.bot.get_file(pic_id)
@@ -303,7 +304,7 @@ def setchatpic(update, context):
             if os.path.isfile("gpic.png"):
                 os.remove("gpic.png")
     else:
-        msg.reply_text("Reply to some photo or file to set new chat pic!")
+        msg.reply_text("Ответьте на фото или файл, чтобы установить новую картинку для чата!")
 
 
 @run_async
@@ -316,11 +317,11 @@ def rmchatpic(update, context):
     user = update.effective_user
 
     if user_can_changeinfo(chat, user, context.bot.id) is False:
-        msg.reply_text("You don't have enough rights to delete group photo")
+        msg.reply_text("У вас недостаточно прав для удаления картинки группы")
         return
     try:
         context.bot.delete_chat_photo(int(chat.id))
-        msg.reply_text("Successfully deleted chat's profile photo!")
+        msg.reply_text("Фотография профиля чата удалена!")
     except BadRequest as excp:
         msg.reply_text(f"Error! {excp.message}.")
         return
@@ -337,12 +338,12 @@ def setchat_title(update, context):
     args = context.args
 
     if user_can_changeinfo(chat, user, context.bot.id) is False:
-        msg.reply_text("You don't have enough rights to change chat info!")
+        msg.reply_text("У вас недостаточно прав для изменения информации в чате!")
         return
 
     title = " ".join(args)
     if not title:
-        msg.reply_text("Enter some text to set new title in your chat!")
+        msg.reply_text("Введите текст, чтобы задать новый заголовок в чате!")
         return
 
     try:
@@ -366,12 +367,12 @@ def set_sticker(update, context):
     user = update.effective_user
 
     if user_can_changeinfo(chat, user, context.bot.id) is False:
-        return msg.reply_text("You're missing rights to change chat info!")
+        return msg.reply_text("У вас нет прав на изменение информации в чате!")
 
     if msg.reply_to_message:
         if not msg.reply_to_message.sticker:
             return msg.reply_text(
-                "You need to reply to some sticker to set chat sticker set!"
+                "Вам нужно ответить на какой-нибудь стикер, чтобы установить набор стикеров чата!"
             )
         stkr = msg.reply_to_message.sticker.set_name
         try:
@@ -381,12 +382,12 @@ def set_sticker(update, context):
         except BadRequest as excp:
             if excp.message == "Participants_too_few":
                 return msg.reply_text(
-                    "Sorry, due to telegram restrictions chat needs to have minimum 100 members before they can have group stickers!"
+                    "Извините, из-за ограничений Telegram в чате должно быть минимум 100 участников, прежде чем они смогут иметь групповые стикеры.!"
                 )
             msg.reply_text(f"Error! {excp.message}.")
     else:
         msg.reply_text(
-            "You need to reply to some sticker to set chat sticker set!")
+            "Вам нужно ответить на какой-нибудь стикер, чтобы установить набор стикеров чата!")
 
 
 @run_async
@@ -399,17 +400,17 @@ def set_desc(update, context):
     user = update.effective_user
 
     if user_can_changeinfo(chat, user, context.bot.id) is False:
-        return msg.reply_text("You're missing rights to change chat info!")
+        return msg.reply_text("У вас нет прав на изменение информации в чате!")
 
     tesc = msg.text.split(None, 1)
     if len(tesc) >= 2:
         desc = tesc[1]
     else:
-        return msg.reply_text("Setting empty description won't do anything!")
+        return msg.reply_text("Установка пустого описания ничего не даст!")
     try:
         if len(desc) > 255:
             return msg.reply_text(
-                "Description must needs to be under 255 characters!")
+                "Описание должно содержать не более 255 символов!")
         context.bot.set_chat_description(chat.id, desc)
         msg.reply_text(
             f"Successfully updated chat description in {chat.title}!")
@@ -440,7 +441,7 @@ def pin(update: Update, context: CallbackContext) -> str:
     prev_message = update.effective_message.reply_to_message
 
     if user_can_pin(chat, user, context.bot.id) is False:
-        message.reply_text("You are missing rights to pin a message!")
+        message.reply_text("У вас отсутствуют права на закрепление сообщения!")
         return ""
 
     is_silent = True
@@ -514,11 +515,11 @@ def invite(update: Update, context: CallbackContext):
             update.effective_message.reply_text(invitelink)
         else:
             update.effective_message.reply_text(
-                "I don't have access to the invite link, try changing my permissions!"
+                "У меня нет доступа к ссылке для приглашения, попробуйте изменить мои разрешения!"
             )
     else:
         update.effective_message.reply_text(
-            "I can only give you invite links for supergroups and channels, sorry!"
+            "Я могу дать вам только пригласительные ссылки для супергрупп и каналов, извините!"
         )
 
 
@@ -638,7 +639,6 @@ def adminlist(update, context):
 
 __help__ = """
  ❍ /admins*:* Список админов в чате.
-
 *Admins only:*
  ❍ /pin*:* Тихо прикрепляет сообщение, на которое ответил. Добавьте 'loud', 'notify' или 'violent', чтобы отправить уведомление пользователям
  ❍ /unpin*:* Открепляет закрепленное сообщение
@@ -658,10 +658,8 @@ __help__ = """
  ❍ /purge <integer X>*:* удаляет ответное сообщение и X сообщений, следующих за ним.
  ❍ /zombies: подсчитывает количество удаленных аккаунтов в вашей группе
  ❍ /zombies clean: удаляет удаленные аккаунты из чата
-
 *Внимание:* Чаты в ночном режиме автоматически закрываются в 12 ночью (мск)
 и автоматически открываются в 6 утром (Мск) Для предотвращения ночных спамов.
-
 ⚠️ `Read from top`
 """
 
@@ -707,7 +705,7 @@ dispatcher.add_handler(SETCHAT_TITLE_HANDLER)
 dispatcher.add_handler(SETSTICKET_HANDLER)
 dispatcher.add_handler(SETDESC_HANDLER)
 
-__mod_name__ = "Админ"
+__mod_name__ = "Admin"
 __command_list__ = [
     "adminlist",
     "admins",
