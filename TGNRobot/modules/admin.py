@@ -92,9 +92,9 @@ def promote(update: Update, context: CallbackContext) -> str:
         )
     except BadRequest as err:
         if err.message == "User_not_mutual_contact":
-            message.reply_text("I can't promote someone who isn't in the group.")
+            message.reply_text("Я не могу повышать кого-то, кто не в группе.")
         else:
-            message.reply_text("An error occured while promoting.")
+            message.reply_text("Произошла ошибка при повышение")
         return
 
     bot.sendMessage(
@@ -130,12 +130,12 @@ def demote(update: Update, context: CallbackContext) -> str:
     user_id = extract_user(message, args)
 
     if user_can_promote(chat, user, context.bot.id) is False:
-        message.reply_text("You don't have enough rights to demote someone!")
+        message.reply_text("У вас недостаточно прав, чтобы кого-то понизить!")
         return ""
 
     if not user_id:
         message.reply_text(
-            "You don't seem to be referring to a user or the ID specified is incorrect.."
+            "Похоже, вы не имеете в виду пользователя или указан неверный идентификатор.."
         )
         return
 
@@ -145,15 +145,15 @@ def demote(update: Update, context: CallbackContext) -> str:
         return
 
     if user_member.status == "creator":
-        message.reply_text("This person CREATED the chat, how would I demote them?")
+        message.reply_text("Этот человек СОЗДАЛ чат, как мне его понизить в должности?")
         return
 
     if not user_member.status == "administrator":
-        message.reply_text("Can't demote what wasn't promoted!")
+        message.reply_text("Невозможно понизить в должности того, кого не повысили!")
         return
 
     if user_id == bot.id:
-        message.reply_text("I can't demote myself! Get an admin to do it for me.")
+        message.reply_text("Я не могу понизить себя! Попросите администратора сделать это за меня.")
         return
 
     try:
@@ -186,8 +186,8 @@ def demote(update: Update, context: CallbackContext) -> str:
         return log_message
     except BadRequest:
         message.reply_text(
-            "Could not demote. I might not be admin, or the admin status was appointed by another"
-            " user, so I can't act upon them!"
+            "Не удалось понизить в должности. Я мог не быть админом, или статус админа назначил другой"
+            " пользователь, поэтому я не могу действовать в соответствии с ними!"
         )
         return
 
@@ -200,7 +200,7 @@ def refresh_admin(update, _):
     except KeyError:
         pass
 
-    update.effective_message.reply_text("Admins cache refreshed!")
+    update.effective_message.reply_text("Кеш администратора обновлен!")
 
 
 @run_async
@@ -223,41 +223,41 @@ def set_title(update: Update, context: CallbackContext):
 
     if not user_id:
         message.reply_text(
-            "You don't seem to be referring to a user or the ID specified is incorrect.."
+            "Похоже, вы не имеете в виду пользователя или указан неверный идентификатор.."
         )
         return
 
     if user_member.status == "creator":
         message.reply_text(
-            "This person CREATED the chat, how can i set custom title for him?"
+            "Этот человек СОЗДАЛ чат, как мне установить для него индивидуальный заголовок?"
         )
         return
 
     if user_member.status != "administrator":
         message.reply_text(
-            "Can't set title for non-admins!\nPromote them first to set custom title!"
+            "Невозможно установить заголовок для пользователей, не являющихся администраторами!\nСначала продвигайте их, чтобы задать собственное название.!"
         )
         return
 
     if user_id == bot.id:
         message.reply_text(
-            "I can't set my own title myself! Get the one who made me admin to do it for me."
+            "Я не могу установить собственное название! Пусть тот, кто сделал меня админом, сделает это за меня.."
         )
         return
 
     if not title:
-        message.reply_text("Setting blank title doesn't do anything!")
+        message.reply_text("Установка пустого заголовка ничего не делает!")
         return
 
     if len(title) > 16:
         message.reply_text(
-            "The title length is longer than 16 characters.\nTruncating it to 16 characters."
+            "Длина заголовка превышает 16 символов."
         )
 
     try:
         bot.setChatAdministratorCustomTitle(chat.id, user_id, title)
     except BadRequest:
-        message.reply_text("I can't set custom title for admins that I didn't promote!")
+        message.reply_text("Я не могу установить индивидуальный заголовок для админов, которых я не повышал!")
         return
 
     bot.sendMessage(
