@@ -21,7 +21,7 @@ def approve(update, context):
     user_id = extract_user(message, args)
     if not user_id:
         message.reply_text(
-            "I don't know who you're talking about, you're going to need to specify a user!"
+            "Я не знаю, о ком вы говорите, вам нужно будет указать пользователя!"
         )
         return ""
     try:
@@ -30,7 +30,7 @@ def approve(update, context):
         return ""
     if member.status == "administrator" or member.status == "creator":
         message.reply_text(
-            "User is already admin - locks, blocklists, and antiflood already don't apply to them."
+            "Пользователь уже является администратором - блокировки, заблокированные списки и антифлуд к ним уже не применяются."
         )
         return ""
     if sql.is_approved(message.chat_id, user_id):
@@ -66,7 +66,7 @@ def disapprove(update, context):
     user_id = extract_user(message, args)
     if not user_id:
         message.reply_text(
-            "I don't know who you're talking about, you're going to need to specify a user!"
+            "Я не знаю, о ком вы говорите, вам нужно будет указать пользователя!"
         )
         return ""
     try:
@@ -74,14 +74,14 @@ def disapprove(update, context):
     except BadRequest:
         return ""
     if member.status == "administrator" or member.status == "creator":
-        message.reply_text("This user is an admin, they can't be unapproved.")
+        message.reply_text("Этот пользователь является администратором, он не может быть отклонен.")
         return ""
     if not sql.is_approved(message.chat_id, user_id):
-        message.reply_text(f"{member.user['first_name']} isn't approved yet!")
+        message.reply_text(f"{member.user['first_name']} еще не утвержден!")
         return ""
     sql.disapprove(message.chat_id, user_id)
     message.reply_text(
-        f"{member.user['first_name']} is no longer approved in {chat_title}."
+        f"{member.user['first_name']} больше не одобряется в {chat_title}."
     )
     log_message = (
         f"<b>{html.escape(chat.title)}:</b>\n"
@@ -121,16 +121,16 @@ def approval(update, context):
     member = chat.get_member(int(user_id))
     if not user_id:
         message.reply_text(
-            "I don't know who you're talking about, you're going to need to specify a user!"
+            "Я не знаю, о ком вы говорите, вам нужно будет указать пользователя!"
         )
         return ""
     if sql.is_approved(message.chat_id, user_id):
         message.reply_text(
-            f"{member.user['first_name']} is an approved user. Locks, antiflood, and blocklists won't apply to them."
+            f"{member.user['first_name']} является утвержденным пользователем. Блокировки, антифлуд и блок-листы на них не распространяются."
         )
     else:
         message.reply_text(
-            f"{member.user['first_name']} is not an approved user. They are affected by normal commands."
+            f"{member.user['first_name']} не является утвержденным пользователем. На них действуют обычные команды."
         )
 
 
@@ -196,9 +196,9 @@ def unapproveall_btn(update: Update, context: CallbackContext):
 
 
 __help__ = """
-Sometimes, you might trust a user not to send unwanted content.
-Maybe not enough to make them admin, but you might be ok with locks, blacklists, and antiflood not applying to them.
-That's what approvals are for - approve of trustworthy users to allow them to send 
+Иногда вы можете быть уверены, что пользователь не рассылает нежелательный контент.
+Может быть, этого недостаточно, чтобы сделать их администратором, но вы можете быть в порядке, если к ним не применяются блокировки, черные списки и антифлуд.
+Для этого нужны утверждения - одобрение заслуживающих доверия пользователей, чтобы они могли отправлять 
 *Admin commands:*
 - `/approval`*:* Check a user's approval status in this chat.
 - `/approve`*:* Approve of a user. Locks, blacklists, and antiflood won't apply to them anymore.
