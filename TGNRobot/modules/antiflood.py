@@ -101,13 +101,13 @@ def check_flood(update, context) -> str:
 
     except BadRequest:
         msg.reply_text(
-            "I can't restrict people here, give me permissions first! Until then, I'll disable anti-flood."
+            "Я не могу здесь ограничивать людей, сначала дайте мне разрешения! А пока отключу anti-flood."
         )
         sql.set_flood(chat.id, 0)
         return (
             "<b>{}:</b>"
             "\n#INFO"
-            "\nDon't have enough permission to restrict users so automatically disabled anti-flood".format(
+            "\n У вас недостаточно прав для ограничения пользователей, поэтому автоматически отключена защита от флуда.".format(
                 chat.title
             )
         )
@@ -160,7 +160,7 @@ def set_flood(update, context) -> str:
         if update.effective_message.chat.type == "private":
             send_message(
                 update.effective_message,
-                "This command is meant to use in group not in PM",
+                "Эта команда предназначена для использования в группе, а не в личке",
             )
             return ""
         chat_id = update.effective_chat.id
@@ -175,7 +175,7 @@ def set_flood(update, context) -> str:
                     "Antiflood has been disabled in {}.".format(chat_name)
                 )
             else:
-                text = message.reply_text("Antiflood has been disabled.")
+                text = message.reply_text("Antiflood был отключен.")
 
         elif val.isdigit():
             amount = int(val)
@@ -186,7 +186,7 @@ def set_flood(update, context) -> str:
                         "Antiflood has been disabled in {}.".format(chat_name)
                     )
                 else:
-                    text = message.reply_text("Antiflood has been disabled.")
+                    text = message.reply_text("Antiflood был отключен.")
                 return (
                     "<b>{}:</b>"
                     "\n#SETFLOOD"
@@ -200,7 +200,7 @@ def set_flood(update, context) -> str:
             elif amount <= 3:
                 send_message(
                     update.effective_message,
-                    "Antiflood must be either 0 (disabled) or number greater than 3!",
+                    "Antiflood должно быть либо 0 (отключено), либо число больше 3!",
                 )
                 return ""
 
@@ -214,7 +214,7 @@ def set_flood(update, context) -> str:
                     )
                 else:
                     text = message.reply_text(
-                        "Successfully updated anti-flood limit to {}!".format(amount)
+                        "Лимит защиты от флуда обновлен до {}!".format(amount)
                     )
                 return (
                     "<b>{}:</b>"
@@ -228,11 +228,11 @@ def set_flood(update, context) -> str:
                 )
 
         else:
-            message.reply_text("Invalid argument please use a number, 'off' or 'no'")
+            message.reply_text("Недействительный аргумент, используйте число, 'off' or 'no'")
     else:
         message.reply_text(
             (
-                "Use `/setflood number` to enable anti-flood.\nOr use `/setflood off` to disable antiflood!."
+                "Используйте `/setflood number` для включения anti-flood.\nИли используйте `/setflood off`, чтобы отключить antiflood!."
             ),
             parse_mode="markdown",
         )
@@ -263,20 +263,20 @@ def flood(update, context):
     if limit == 0:
         if conn:
             text = msg.reply_text(
-                "I'm not enforcing any flood control in {}!".format(chat_name)
+                "Я не применяю никаких мер по борьбе с флудом в {}!".format(chat_name)
             )
         else:
-            text = msg.reply_text("I'm not enforcing any flood control here!")
+            text = msg.reply_text("Я не применяю здесь никаких мер по борьбе с флудом!")
     else:
         if conn:
             text = msg.reply_text(
-                "I'm currently restricting members after {} consecutive messages in {}.".format(
+                "В настоящее время я ограничиваю участников после {} последовательные сообщения в {}.".format(
                     limit, chat_name
                 )
             )
         else:
             text = msg.reply_text(
-                "I'm currently restricting members after {} consecutive messages.".format(
+                "В настоящее время я ограничиваю участников после {} последовательные сообщения.".format(
                     limit
                 )
             )
@@ -299,7 +299,7 @@ def set_flood_mode(update, context):
         if update.effective_message.chat.type == "private":
             send_message(
                 update.effective_message,
-                "This command is meant to use in group not in PM",
+                "Эта команда предназначена для использования в группе, а не в личке",
             )
             return ""
         chat = update.effective_chat
@@ -381,7 +381,7 @@ Examples of time value: 4m = 4 minutes, 3h = 3 hours, 6d = 6 days, 5w = 5 weeks.
             )
         else:
             text = msg.reply_text(
-                "Sending more message than flood limit will result in {}.".format(
+                "Отправка большего количества сообщений, чем лимит флуда, приведет к {}.".format(
                     settypeflood
                 )
             )
@@ -397,7 +397,7 @@ def __chat_settings__(chat_id, user_id):
     if limit == 0:
         return "Not enforcing to flood control."
     else:
-        return "Antiflood has been set to`{}`.".format(limit)
+        return "Antiflood был установлен на`{}`.".format(limit)
 
 
 __help__ = """
