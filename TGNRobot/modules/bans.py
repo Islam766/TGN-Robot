@@ -260,7 +260,7 @@ def punch(update: Update, context: CallbackContext) -> str:
         return log_message
 
     if is_user_ban_protected(chat, user_id):
-        message.reply_text("Я действительно хотел бы забанить этого пользователя....")
+        message.reply_text("Я действительно хотел бы выгнать этого пользователя....")
         return log_message
 
     res = chat.unban_member(user_id)  # unban on current user = kick
@@ -283,7 +283,7 @@ def punch(update: Update, context: CallbackContext) -> str:
         return log
 
     else:
-        message.reply_text("Черт возьми, я не могу ударить этого пользователя.")
+        message.reply_text("Черт возьми, я не могу выгнать этого пользователя.")
 
     return log_message
 
@@ -320,7 +320,7 @@ def unban(update: Update, context: CallbackContext) -> str:
     user_id, reason = extract_user_and_text(message, args)
 
     if not user_id:
-        message.reply_text("I doubt that's a user.")
+        message.reply_text("Сомневаюсь, что это пользователь.")
         return log_message
 
     try:
@@ -328,18 +328,18 @@ def unban(update: Update, context: CallbackContext) -> str:
     except BadRequest as excp:
         if excp.message != "User not found":
             raise
-        message.reply_text("I can't seem to find this user.")
+        message.reply_text("Кажется, я не могу найти этого пользователя.")
         return log_message
     if user_id == bot.id:
-        message.reply_text("How would I unban myself if I wasn't here...?")
+        message.reply_text("Как бы я себя разбанил, если бы меня не было здесь...?")
         return log_message
 
     if is_user_in_chat(chat, user_id):
-        message.reply_text("Isn't this person already here??")
+        message.reply_text("Разве этот человек уже не здесь???")
         return log_message
 
     chat.unban_member(user_id)
-    message.reply_text("Yep, this user can join!")
+    message.reply_text("Да, этот пользователь может присоединиться!")
 
     log = (
         f"<b>{html.escape(chat.title)}:</b>\n"
@@ -368,7 +368,7 @@ def selfunban(context: CallbackContext, update: Update) -> str:
     try:
         chat_id = int(args[0])
     except:
-        message.reply_text("Give a valid chat ID.")
+        message.reply_text("Укажите действительный ID чата.")
         return
 
     chat = bot.getChat(chat_id)
@@ -377,17 +377,17 @@ def selfunban(context: CallbackContext, update: Update) -> str:
         member = chat.get_member(user.id)
     except BadRequest as excp:
         if excp.message == "User not found":
-            message.reply_text("I can't seem to find this user.")
+            message.reply_text("Я не могу найти этого пользователя.")
             return
         else:
             raise
 
     if is_user_in_chat(chat, user.id):
-        message.reply_text("Aren't you already in the chat??")
+        message.reply_text("Разве ты еще не в чате??")
         return
 
     chat.unban_member(user.id)
-    message.reply_text("Yep, I have unbanned you.")
+    message.reply_text("Ага, я тебя разблокировал.")
 
     log = (
         f"<b>{html.escape(chat.title)}:</b>\n"
@@ -401,14 +401,14 @@ def selfunban(context: CallbackContext, update: Update) -> str:
 __help__ = """
  ❍ /punchme*:* Удаляет пользователя, использовавшего команду.
 
-*Admins only:*
+*Только админы:*
  ❍ /ban <userhandle>*:* Забанит пользователя в чате. <ответить на сообщение пользователя> или <упомянуть>
  ❍ /sban <userhandle>*:* Забанить пользователя, не оставляя сообщения. <ответить на сообщение пользователя> или <упомянуть>
  ❍ /tban <userhandle> x(m/h/d)*:* для выдачи временного бана. m = минуты, h = часы, d = дни.
  ❍ /unban <userhandle>*:* Снимает бан.. <ответить на сообщение пользователя> или <упомянуть>
  ❍ /punch <userhandle>*:* Удаляет пользователя из группы <ответить на сообщение пользователя> или <упомянуть>
 
- *Admins only:*
+ *Только админы:*
  ❍ /mute <userhandle>*:* выдаёт мут участнику.
  ❍ /tmute <userhandle> x(m/h/d)*:* выдаёт мут участнику на указанное время.. (ответить на сообщение пользователя). `m` = `минут`, `h` = `часы`, `d` = `дней`
  ❍ /unmute <userhandle>*:* снимает мут.
