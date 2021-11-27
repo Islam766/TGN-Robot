@@ -13,7 +13,7 @@ async def _(event):
     if event.fwd_from:
         return
     input_str = event.pattern_match.group(1)
-    KkK = await event.reply("searching for the book...")
+    KkK = await event.reply("поиск книги...")
     lin = "https://b-ok.cc/s/"
     text = input_str
     link = lin + text
@@ -29,7 +29,7 @@ async def _(event):
     for nb in total.descendants:
         nbx = nb.replace("(", "").replace(")", "")
     if nbx == "0":
-        await event.reply("No Books Found with that name.")
+        await event.reply("Книга с таким названием не найдено.")
     else:
 
         lool = 0
@@ -45,14 +45,14 @@ async def _(event):
                 f.write("\n" + title)
                 f.write("\nBook link:- " + link + "\n\n")
 
-        f.write("By @Sophia_Ro_bot")
+        f.write("By @islam95_bot")
         f.close()
-        caption = "A collabration with No-one.\n Join Support @SUPERIOR_SUPPORT"
+        caption = "Присоединяйтесь к поддержке  @SUPERIOR_SUPPORT"
 
         await tbot.send_file(
             event.chat_id,
             "book.txt",
-            caption="**BOOKS GATHERED SUCCESSFULLY!\n\nBY SOPHIA. JOIN THE SUPPORT @SUPERIOR_SUPPORT.**",
+            caption="**КНИГИ СОБРАНЫ УСПЕШНО!\nПРИСОЕДИНЯЙТЕСЬ К ПОДДЕРЖКЕ @SUPERIOR_SUPPORT.**",
         )
         os.remove("book.txt")
         await KkK.delete()
