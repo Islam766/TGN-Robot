@@ -172,7 +172,7 @@ if is_module_loaded(FILENAME):
                 command_list = module.__command_list__
             except:
                 update.effective_message.reply_text(
-                    "Module does not contain command list!"
+                    "Модуль не содержит списка команд!"
                 )
                 return
 
@@ -192,7 +192,7 @@ if is_module_loaded(FILENAME):
             if disabled_cmds:
                 disabled_cmds_string = ", ".join(disabled_cmds)
                 update.effective_message.reply_text(
-                    f"Disabled the uses of `{disabled_cmds_string}`",
+                    f"Отключено использование `{disabled_cmds_string}`",
                     parse_mode=ParseMode.MARKDOWN,
                 )
 
@@ -204,7 +204,7 @@ if is_module_loaded(FILENAME):
                 )
 
         else:
-            update.effective_message.reply_text("What should I disable?")
+            update.effective_message.reply_text("Что мне отключить?")
 
     @run_async
     @connection_status
@@ -222,10 +222,10 @@ if is_module_loaded(FILENAME):
                     f"Enabled the use of `{enable_cmd}`", parse_mode=ParseMode.MARKDOWN
                 )
             else:
-                update.effective_message.reply_text("Is that even disabled?")
+                update.effective_message.reply_text("Это вообще отключено?")
 
         else:
-            update.effective_message.reply_text("What should I enable?")
+            update.effective_message.reply_text("Что я должен включить?")
 
     @run_async
     @connection_status
@@ -289,22 +289,22 @@ if is_module_loaded(FILENAME):
             for cmd in set(DISABLE_CMDS + DISABLE_OTHER):
                 result += f" - `{escape_markdown(cmd)}`\n"
             update.effective_message.reply_text(
-                f"The following commands are toggleable:\n{result}",
+                f"Следующие команды можно переключать:\n{result}",
                 parse_mode=ParseMode.MARKDOWN,
             )
         else:
-            update.effective_message.reply_text("No commands can be disabled.")
+            update.effective_message.reply_text("Никакие команды не могут быть отключены.")
 
     # do not async
     def build_curr_disabled(chat_id: Union[str, int]) -> str:
         disabled = sql.get_all_disabled(chat_id)
         if not disabled:
-            return "No commands are disabled!"
+            return "Никакие команды не отключены!"
 
         result = ""
         for cmd in disabled:
             result += " - `{}`\n".format(escape_markdown(cmd))
-        return "The following commands are currently restricted:\n{}".format(result)
+        return "Следующие команды в настоящее время ограничены:\n{}".format(result)
 
     @run_async
     @connection_status
@@ -338,17 +338,16 @@ if is_module_loaded(FILENAME):
     dispatcher.add_handler(TOGGLE_HANDLER)
 
     __help__ = """
-    ❍ /cmds*:* check the current status of disabled commands
+    ❍ /cmds *: * проверить текущий статус отключенных команд
 
-    *Admins only:*
-    ❍ /enable <cmd name>*:* enable that command
-    ❍ /disable <cmd name>*:* disable that command
-    ❍ /enablemodule <module name>*:* enable all commands in that module
-    ❍ /disablemodule <module name>*:* disable all commands in that module
-    ❍ /listcmds*:* list all possible toggleable commands
-    """
+    * Только администраторы: *
+    ❍ /enable <cmd name> *: * включить эту команду
+    ❍ /disable <cmd name> *: * отключить эту команду
+    ❍ /enablemodule <имя модуля> *: * включить все команды в этом модуле
+    ❍ /disablemodule <имя модуля> *: * отключить все команды в этом модуле
+    ❍ /listcmds *: * перечислить все возможные переключаемые команды    """
 
-    __mod_name__ = "Disable"
+    __mod_name__ = "Запрещать"
 
 else:
     DisableAbleCommandHandler = CommandHandler
