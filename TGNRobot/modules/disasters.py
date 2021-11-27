@@ -30,10 +30,10 @@ ELEVATED_USERS_FILE = os.path.join(os.getcwd(), "TGNRobot/elevated_users.json")
 def check_user_id(user_id: int, context: CallbackContext) -> Optional[str]:
     bot = context.bot
     if not user_id:
-        reply = "That...is a chat! baka ka omae?"
+        reply = "Это... чат!?"
 
     elif user_id == bot.id:
-        reply = "This does not work that way."
+        reply = "Это не так."
 
     else:
         reply = None
@@ -73,16 +73,16 @@ def addsudo(update: Update, context: CallbackContext) -> str:
         data = json.load(infile)
 
     if user_id in DRAGONS:
-        message.reply_text("This member is already a Dragon Disaster")
+        message.reply_text("Этот участник уже является Dragon Disaster")
         return ""
 
     if user_id in DEMONS:
-        rt += "Requested HA to promote a Demon Disaster to Dragon."
+        rt += "Запрошен HA для продвижения Demon Disaster в Dragon."
         data["supports"].remove(user_id)
         DEMONS.remove(user_id)
 
     if user_id in WOLVES:
-        rt += "Requested HA to promote a Wolf Disaster to Dragon."
+        rt += "Запрошен HA, чтобы продвинуть Бедствие Волка до Дракона.."
         data["whitelists"].remove(user_id)
         WOLVES.remove(user_id)
 
@@ -94,7 +94,7 @@ def addsudo(update: Update, context: CallbackContext) -> str:
 
     update.effective_message.reply_text(
         rt
-        + "\nSuccessfully set Disaster level of {} to Dragon!".format(
+        + "\nУспешно установить уровень бедствия {} на Дракон!".format(
             user_member.first_name
         )
     )
@@ -135,16 +135,16 @@ def addsupport(
         data = json.load(infile)
 
     if user_id in DRAGONS:
-        rt += "Requested HA to demote this Dragon to Demon"
+        rt += "Запрошен HA для понижения этого дракона до демона."
         data["sudos"].remove(user_id)
         DRAGONS.remove(user_id)
 
     if user_id in DEMONS:
-        message.reply_text("This user is already a Demon Disaster.")
+        message.reply_text("Этот пользователь уже является Demon Disaster.")
         return ""
 
     if user_id in WOLVES:
-        rt += "Requested HA to promote this Wolf Disaster to Demon"
+        rt += "Запрошен HA продвигать это Волчье бедствие до Демона."
         data["whitelists"].remove(user_id)
         WOLVES.remove(user_id)
 
@@ -552,56 +552,57 @@ def devlist(update: Update, context: CallbackContext):
 
 # __help__ = f"""
 # *⚠️ Notice:*
-# Commands listed here only work for users with special access are mainly used for troubleshooting, debugging purposes.
-# Group admins/group owners do not need these commands. 
+# Перечисленные здесь команды работают только для пользователей со специальным доступом и в основном используются для устранения неполадок и отладки.
+# Администраторам груп/владельцам групп эти команды не нужны. 
 
-# *List all special users:*
-#  ❍ /dragons*:* Lists all Dragon disasters
-#  ❍ /demons*:* Lists all Demon disasters
-#  ❍ /tigers*:* Lists all Tigers disasters
-#  ❍ /wolves*:* Lists all Wolf disasters
-#  ❍ /heroes*:* Lists all Hero Association members
-#  ❍ /adddragon*:* Adds a user to Dragon
-#  ❍ /adddemon*:* Adds a user to Demon
-#  ❍ /addtiger*:* Adds a user to Tiger
-#  ❍ /addwolf*:* Adds a user to Wolf
-#  ❍ `Add dev doesnt exist, devs should know how to add themselves`
+# * Список всех специальных пользователей: *
+# ❍ / dragons *: * Список всех драконьих бедствий
+# ❍ / demons *: * Список всех демонов.
+# ❍ / tigers *: * Список всех бедствий с тиграми
+# ❍ / wolves *: * Список всех бедствий с волками
+# ❍ / heroes *: * Список всех членов ассоциации героев.
+# ❍ / adddragon *: * Добавляет пользователя в Dragon
+# ❍ / adddemon *: * Добавляет пользователя в Demon
+# ❍ / addtiger *: * Добавляет пользователя в Tiger
+# ❍ / addwolf *: * Добавляет пользователя в Wolf
+# ❍ `Добавить разработчика не существует, разработчики должны знать, как добавлять себя`
 
-# *Ping:*
-#  ❍ /ping*:* gets ping time of bot to telegram server
-#  ❍ /pingall*:* gets all listed ping times
+# *Пинг:*
+# ❍ / ping *: * получает время пинга бота на сервер Telegram
+# ❍ / pingall *: * получает все указанные значения времени пинга
 
-# *Broadcast: (Bot owner only)*
-# *Note:* This supports basic markdown
-#  ❍ /broadcastall*:* Broadcasts everywhere
-#  ❍ /broadcastusers*:* Broadcasts too all users
-#  ❍ /broadcastgroups*:* Broadcasts too all groups
+# * Трансляция: (только для владельца бота) *
+# * Примечание: * Это поддерживает базовую уценку
+# ❍ / broadcastall *: * Вещает везде
+# ❍ / broadcastusers *: * Транслирует тоже всех пользователей
+# ❍ / broadcastgroups *: * Транслирует тоже все группы
 
-# *Groups Info:*
-#  ❍ /groups*:* List the groups with Name, ID, members count as a txt
-#  ❍ /leave <ID>*:* Leave the group, ID must have hyphen
-#  ❍ /stats*:* Shows overall bot stats
-#  ❍ /getchats*:* Gets a list of group names the user has been seen in. Bot owner only
-#  ❍ /ginfo username/link/ID*:* Pulls info panel for entire group
 
-# *Access control:* 
-#  ❍ /ignore*:* Blacklists a user from using the bot entirely
-#  ❍ /lockdown <off/on>*:* Toggles bot adding to groups
-#  ❍ /notice*:* Removes user from blacklist
-#  ❍ /ignoredlist*:* Lists ignored users
+# *Информация о группах: *
+# ❍ / groups *: * Список групп с именем, идентификатором, количество участников как txt
+# ❍ / leave <ID> *: * Выйти из группы, ID должен иметь дефис
+# ❍ / stats *: * Показывает общую статистику бота
+# ❍ / getchats *: * Получает список имен групп, в которых был замечен пользователь. Только владелец бота
+# ❍ / ginfo username / link / ID *: * Вытягивает информационную панель для всей группы
 
-# *Speedtest:*
-#  ❍ /speedtest*:* Runs a speedtest and gives you 2 options to choose from, text or image output
+# *Контроль доступа:*
+# ❍ / ignore *: * Запрещает пользователю полностью использовать бот
+# ❍ / lockdown <off / on> *: * Включает добавление бота в группы
+# ❍ / notice *: * Удаляет пользователя из черного списка
+# ❍ / ignoredlist *: * Список игнорируемых пользователей
 
-# *Module loading:*
-#  ❍ /listmodules*:* Lists names of all modules
-#  ❍ /load modulename*:* Loads the said module to memory without restarting.
-#  ❍ /unload modulename*:* Loads the said module frommemory without restarting memory without restarting the bot 
+# * Speedtest: *
+# ❍ / speedtest *: * Запускает спидтест и дает вам 2 варианта на выбор: вывод текста или изображения.
 
-# *Remote commands:*
-#  ❍ /rban*:* user group*:* Remote ban
-#  ❍ /runban*:* user group*:* Remote un-ban
-#  ❍ /rpunch*:* user group*:* Remote punch
+# * Загрузка модуля: *
+# ❍ / listmodules *: * Список названий всех модулей
+# ❍ / load modulename *: * Загружает указанный модуль в память без перезапуска.
+# ❍ / unload modulename *: * Загружает указанный модуль из меня
+
+# * Удаленные команды: *
+# ❍ / rban *: * группа пользователей *: * Удаленный бан
+# ❍ / runban *: * группа пользователей *: * Удаленная разблокировка
+# ❍ / rpunch *: * группа пользователей *: * Удаленный удар
 #  ❍ /rmute*:* user group*:* Remote mute
 #  ❍ /runmute*:* user group*:* Remote un-mute
 
