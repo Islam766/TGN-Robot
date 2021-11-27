@@ -1,22 +1,22 @@
 __mod_name__ = "◎Tools"
 
 __help__ = """
-*Fake Info*
- ❍ /fakegen*:* Generates Fake Information
- ❍ /picgen*:* Generate a fake pic 
+*Поддельная информация*
+ ❍ /fakegen*:* Создает фальшивую информацию
+ ❍ /picgen*:* Создать фальшивую картинку 
 
 *Date-time-Weather*
- ❍ /time <country code>*:* Gives information about a timezone.
- ❍ /weather <city>*:* Get weather info in a particular place.
- ❍ /wttr <city>*:* Advanced weather module, usage same as /weather
- ❍ /wttr moon*:* Get the current status of moon
+ ❍ /time <country code>*:* Предоставляет информацию о часовом поясе.
+ ❍ /weather <city>*:* Получите информацию о погоде в определенном месте.
+ ❍ /wttr <city>*:* Расширенный модуль погоды, использование такое же, как /weather
+ ❍ /wttr moon*:* Получить текущий статус луны
  
 *Quotly*
-- /q : reply any message with this command to create a sticker.
+- /q : ответьте на любое сообщение с помощью этой команды, чтобы создать стикер.
 
 *Converts*
- ❍ /encrypt*:* Encrypts The Given Text
- ❍ /decrypt*:* Decrypts Previously Ecrypted Text
- ❍ /zip*:* reply to a telegram file to compress it in .zip format
- ❍ /unzip*:* reply to a telegram file to decompress it from the .zip format
+ ❍ /encrypt*:* Шифрует данный текст
+ ❍ /decrypt*:* Расшифровывает ранее зашифрованный текст
+ ❍ /zip*:* ответить на файл телеграммы, чтобы сжать его в формате .zip
+ ❍ /unzip*:* ответить на файл телеграммы, чтобы распаковать его из формата .zip
 """
