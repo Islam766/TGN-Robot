@@ -600,33 +600,32 @@ def devlist(update: Update, context: CallbackContext):
 # ❍ / unload modulename *: * Загружает указанный модуль из меня
 
 # * Удаленные команды: *
-# ❍ / rban *: * группа пользователей *: * Удаленный бан
-# ❍ / runban *: * группа пользователей *: * Удаленная разблокировка
-# ❍ / rpunch *: * группа пользователей *: * Удаленный удар
-#  ❍ /rmute*:* user group*:* Remote mute
-#  ❍ /runmute*:* user group*:* Remote un-mute
+# ❍ /rban *:* группа пользователей *: * Удаленный бан
+# ❍ /runban *:* группа пользователей *: * Удаленная разблокировка
+# ❍ /rpunch *:* группа пользователей *: * Удаленный удар
+# ❍ /rmute *:* группа пользователей *: * Удалённо выдать мут
+# ❍ /runmute *:* группа пользователей *: * Удалённо снять мут
 
-# *Windows self hosted only:*
-#  ❍ /reboot*:* Restarts the bots service
-#  ❍ /gitpull*:* Pulls the repo and then restarts the bots service
+# * Только Windows для самостоятельного размещения: *
+# ❍ / reboot *: * Перезапускает сервис бота
 
-# *Chatbot:* 
-#  ❍ /listaichats*:* Lists the chats the chatmode is enabled in
+# * Чат-бот: *
+# ❍ / listaichats *: * Список чатов, в которых включен режим чата.
  
-# *Debugging and Shell:* 
-#  ❍ /debug <on/off>*:* Logs commands to updates.txt
-#  ❍ /logs*:* Run this in support group to get logs in pm
-#  ❍ /eval*:* Self explanatory
-#  ❍ /sh*:* Runs shell command
-#  ❍ /shell*:* Runs shell command
-#  ❍ /clearlocals*:* As the name goes
-#  ❍ /dbcleanup*:* Removes deleted accs and groups from db
-#  ❍ /py*:* Runs python code
+# * Отладка и оболочка: *
+# ❍ / debug <on / off> *: * Записывает команды в updates.txt
+# ❍ / logs *: * Запустите это в группе поддержки, чтобы получать логи в личку
+# ❍ / eval *: * Не требует пояснений
+# ❍ / sh *: * Запускает команду оболочки
+# ❍ / shell *: * Запускает команду оболочки
+# ❍ / clearlocals *: * Как следует из названия
+# ❍ / dbcleanup *: * Удаляет удаленные аккаунты и группы из БД
+# ❍ / py *: * Запускает код Python
  
-# *Global Bans:*
-#  ❍ /gban <id> <reason>*:* Gbans the user, works by reply too
-#  ❍ /ungban*:* Ungbans the user, same usage as gban
-#  ❍ /gbanlist*:* Outputs a list of gbanned users
+# * Глобальные баны: *
+# ❍ / gban <id> <reason> *: * Gbans пользователя, работает и по ответу
+# ❍ / ungban *: * Отмена запрета на пользователя, такое же использование, как и в gban
+# ❍ / gbanlist *: * Выводит список пользователей, которым запрещен gban
 
 # *Global Blue Text*
 #  ❍ /gignoreblue*:* <word>*:* Globally ignorea bluetext cleaning of saved word across TGN Robot.
