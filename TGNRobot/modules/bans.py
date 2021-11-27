@@ -294,7 +294,7 @@ def punch(update: Update, context: CallbackContext) -> str:
 def punchme(update: Update, context: CallbackContext):
     user_id = update.effective_message.from_user.id
     if is_user_admin(update.effective_chat, user_id):
-        update.effective_message.reply_text("I wish I could... but you're an admin.")
+        update.effective_message.reply_text("Хотел бы я... но ты админ.")
         return
 
     res = update.effective_chat.unban_member(user_id)  # unban on current user = kick
