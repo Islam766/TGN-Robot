@@ -126,7 +126,7 @@ def callback_button(update: Update, context: CallbackContext):
             chat_count = get_muted_chats(update, context, True)
             bot.sendMessage(chat_id, f"Left {chat_count} chats.")
         else:
-            query.answer("You are not allowed to use this.")
+            query.answer("Вам не разрешено использовать это.")
     elif query_type == "db_cleanup":
         if query.from_user.id in admin_list:
             bot.editMessageText("Cleaning up DB ...", chat_id, message.message_id)
@@ -137,7 +137,7 @@ def callback_button(update: Update, context: CallbackContext):
             )
             bot.sendMessage(chat_id, reply)
         else:
-            query.answer("You are not allowed to use this.")
+            query.answer("Вам не разрешено использовать это.")
 
 
 DB_CLEANUP_HANDLER = CommandHandler("dbcleanup", dbcleanup)
