@@ -19,16 +19,16 @@ async def msg(event):
     try:
 	    a = country.info()
     except:
-	    await event.reply("Country Not Avaiable Currently")
-    name = a.get("name")
+	    await event.reply("Страна в настоящее время недоступна")
+    name = a.get("имя")
     bb= a.get("altSpellings")
     hu = ''
     for p in bb:
     	hu += p+",  "
 	
-    area = a.get("area")
+    area = a.get("площадь")
     borders = ""
-    hell = a.get("borders")
+    hell = a.get("границы")
     for fk in hell:
 	    borders += fk+",  "
 	
@@ -37,18 +37,18 @@ async def msg(event):
     for what in WhAt:
 	    call+= what+"  "
 	
-    capital = a.get("capital")
+    capital = a.get("столица")
     currencies = ""
-    fker = a.get("currencies")
+    fker = a.get("валюты")
     for FKer in fker:
 	    currencies += FKer+",  "
 
-    HmM = a.get("demonym")
+    HmM = a.get("демоним")
     geo = a.get("geoJSON")
-    pablo = geo.get("features")
+    pablo = geo.get("Особенности")
     Pablo = pablo[0]
-    PAblo = Pablo.get("geometry")
-    EsCoBaR= PAblo.get("type")
+    PAblo = Pablo.get("геометрия")
+    EsCoBaR= PAblo.get("тип")
     iso = ""
     iSo = a.get("ISO")
     for hitler in iSo:
@@ -58,16 +58,16 @@ async def msg(event):
     nox = fla.upper()
     okie = flag.flag(nox)
 
-    languages = a.get("languages")
+    languages = a.get("языки")
     lMAO=""
     for lmao in languages:
 	    lMAO += lmao+",  "
 
     nonive = a.get("nativeName")
-    waste = a.get("population")
-    reg = a.get("region")
-    sub = a.get("subregion")
-    tik = a.get("timezones")
+    waste = a.get("численность населения")
+    reg = a.get("область")
+    sub = a.get("субрегион")
+    tik = a.get("часовые пояса")
     tom =""
     for jerry in tik:
 	    tom+=jerry+",   "
@@ -101,7 +101,7 @@ Time Zones:- {tom}
 Top Level Domain:- {lanester}
 wikipedia:- {wiki}</b>
 
-Gathered By @Superior_bots.</b>
+Gathered By @islam95_bots.</b>
 """
     
     
