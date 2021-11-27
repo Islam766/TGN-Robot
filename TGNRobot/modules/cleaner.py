@@ -178,7 +178,7 @@ def remove_bluetext_ignore_global(update: Update, context: CallbackContext):
         val = args[0].lower()
         removed = sql.global_unignore_command(val)
         if removed:
-            reply = "<b>{}</b> has been removed from global bluetext cleaner ignore list.".format(
+            reply = "<b>{}</b> был удален из глобального списка игнорирования очистки синего текста.".format(
                 args[0]
             )
         else:
@@ -201,7 +201,7 @@ def bluetext_ignore_list(update: Update, context: CallbackContext):
     text = ""
 
     if global_ignored_list:
-        text = "The following commands are currently ignored globally from bluetext cleaning :\n"
+        text = "Следующие команды в настоящее время глобально игнорируются при очистке синего текста. :\n"
 
         for x in global_ignored_list:
             text += f" - <code>{x}</code>\n"
@@ -213,7 +213,7 @@ def bluetext_ignore_list(update: Update, context: CallbackContext):
             text += f" - <code>{x}</code>\n"
 
     if text == "":
-        text = "No commands are currently ignored from bluetext cleaning."
+        text = "В настоящее время никакие команды не игнорируются при очистке синего текста."
         message.reply_text(text)
         return
 
