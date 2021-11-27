@@ -34,7 +34,7 @@ def allow_connections(update, context) -> str:
                 sql.set_allow_connect_to_chat(chat.id, True)
                 send_message(
                     update.effective_message,
-                    "Connection has been enabled for this chat",
+                    "Подключение к этому чату разрешено",
                 )
             else:
                 send_message(
@@ -47,18 +47,18 @@ def allow_connections(update, context) -> str:
             if get_settings:
                 send_message(
                     update.effective_message,
-                    "Connections to this group are *Allowed* for members!",
+                    "Подключения к этой группе *Разрешен* для членов!",
                     parse_mode=ParseMode.MARKDOWN,
                 )
             else:
                 send_message(
                     update.effective_message,
-                    "Connection to this group are *Not Allowed* for members!",
+                    "Подключение к этой группе *запрещено* для участников!",
                     parse_mode=ParseMode.MARKDOWN,
                 )
     else:
         send_message(
-            update.effective_message, "This command is for group only. Not in PM!"
+            update.effective_message, "Эта команда предназначена только для группы. Не в личку!"
         )
 
 
@@ -81,9 +81,9 @@ def connection_chat(update, context):
         chat_name = update.effective_message.chat.title
 
     if conn:
-        message = "You are currently connected to {}.\n".format(chat_name)
+        message = "В настоящее время вы подключены к {}.\n".format(chat_name)
     else:
-        message = "You are currently not connected in any group.\n"
+        message = "В настоящее время вы не состоите ни в одной группе.\n"
     send_message(update.effective_message, message, parse_mode="markdown")
 
 
@@ -149,10 +149,10 @@ def connect_chat(update, context):
             if gethistory:
                 buttons = [
                     InlineKeyboardButton(
-                        text="❎ Close button", callback_data="connect_close"
+                        text="❎ Кнопка закрытия", callback_data="connect_close"
                     ),
                     InlineKeyboardButton(
-                        text="🧹 Clear history", callback_data="connect_clear"
+                        text="🧹 Чистая история", callback_data="connect_clear"
                     ),
                 ]
             else:
@@ -165,7 +165,7 @@ def connect_chat(update, context):
                 )
                 buttons.append(
                     InlineKeyboardButton(
-                        text="🔌 Disconnect", callback_data="connect_disconnect"
+                        text="🔌 Отключить", callback_data="connect_disconnect"
                     )
                 )
             else:
@@ -241,10 +241,10 @@ def connect_chat(update, context):
                 except Unauthorized:
                     pass
             else:
-                send_message(update.effective_message, "Connection failed!")
+                send_message(update.effective_message, "Ошибка подключения!")
         else:
             send_message(
-                update.effective_message, "Connection to this chat is not allowed!"
+                update.effective_message, "Подключение к этому чату запрещено!"
             )
 
 
@@ -254,12 +254,12 @@ def disconnect_chat(update, context):
         disconnection_status = sql.disconnect(update.effective_message.from_user.id)
         if disconnection_status:
             sql.disconnected_chat = send_message(
-                update.effective_message, "Disconnected from chat!"
+                update.effective_message, "Отключен от чата!"
             )
         else:
-            send_message(update.effective_message, "You're not connected!")
+            send_message(update.effective_message, "Вы не связаны! ")
     else:
-        send_message(update.effective_message, "This command is only available in PM.")
+        send_message(update.effective_message, "Эта команда доступна только в личке.")
 
 
 def connected(bot: Bot, update: Update, chat, user_id, need_admin=True):
@@ -291,14 +291,14 @@ def connected(bot: Bot, update: Update, chat, user_id, need_admin=True):
                 else:
                     send_message(
                         update.effective_message,
-                        "You must be an admin in the connected group!",
+                        "Вы должны быть администратором подключенной группы!",
                     )
             else:
                 return conn_id
         else:
             send_message(
                 update.effective_message,
-                "The group changed the connection rights or you are no longer an admin.\nI've disconnected you.",
+                "Группа изменила права на подключение или вы больше не админ.\nЯ отключил тебя.",
             )
             disconnect_chat(update, bot)
     else:
@@ -306,16 +306,16 @@ def connected(bot: Bot, update: Update, chat, user_id, need_admin=True):
 
 
 CONN_HELP = """
- Actions are available with connected groups:
- • View and edit Notes.
- • View and edit Filters.
- • Get invite link of chat.
- • Set and control AntiFlood settings.
- • Set and control Blacklist settings.
- • Set Locks and Unlocks in chat.
- • Enable and Disable commands in chat.
- • Export and Imports of chat backup.
- • More in future!"""
+ Доступны действия с подключенными группами:
+ • Просмотр и редактирование заметок.
+ • Просмотр и редактирование фильтров.
+ • Получить инвайт-ссылку чата.
+ • Устанавливайте и управляйте настройками AntiFlood.
+ • Установка и управление настройками черного списка.
+ • Установите блокировки и разблокировки в чате.
+ • Включение и отключение команд в чате.
+ • Экспорт и импорт резервной копии чата.
+ • Больше"""
 
 
 @run_async
@@ -368,7 +368,7 @@ def connect_button(update, context):
                 query.message.edit_text("Connection failed!")
         else:
             context.bot.answer_callback_query(
-                query.id, "Connection to this chat is not allowed!", show_alert=True
+                query.id, "Подключение к этому чату запрещено!", show_alert=True
             )
     elif disconnect_match:
         disconnection_status = sql.disconnect(query.from_user.id)
@@ -376,13 +376,13 @@ def connect_button(update, context):
             sql.disconnected_chat = query.message.edit_text("Disconnected from chat!")
         else:
             context.bot.answer_callback_query(
-                query.id, "You're not connected!", show_alert=True
+                query.id, "Вы не подключены!", show_alert=True
             )
     elif clear_match:
         sql.clear_history_conn(query.from_user.id)
-        query.message.edit_text("History connected has been cleared!")
+        query.message.edit_text("Связанная история удалена!")
     elif connect_close:
-        query.message.edit_text("Closed.\nTo open again, type /connect")
+        query.message.edit_text("Закрыто.\nЧтобы снова открыть, введите /connect")
     else:
         connect_chat(update, context)
 
