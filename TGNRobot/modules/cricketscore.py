@@ -25,7 +25,7 @@ async def _(event):
         return
     if event.is_group:
      if not (await is_register_admin(event.input_chat, event.message.sender_id)):
-       await event.reply("🚨 Need Admin Pewer.. You can't use this command.. But you can use in my pm")
+       await event.reply("🚨 Нужен Admin Pewer .. Вы не можете использовать эту команду .. Но вы можете использовать в моем личном кабинете.")
        return
 
     score_page = "http://static.cricinfo.com/rss/livescores.xml"
