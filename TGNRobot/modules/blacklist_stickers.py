@@ -152,7 +152,7 @@ def add_blackliststicker(update: Update, context: CallbackContext):
     else:
         send_message(
             update.effective_message,
-            "Tell me what stickers you want to add to the blacklist.",
+            "Подскажите, какие стикеры вы хотите добавить в черный список.",
         )
 
 
@@ -214,7 +214,7 @@ def unblackliststicker(update: Update, context: CallbackContext):
         elif not successful:
             send_message(
                 update.effective_message,
-                "None of these stickers exist, so they cannot be removed.",
+                "Ни одной из этих стикеров не существует, поэтому их нельзя удалить..",
                 parse_mode=ParseMode.HTML,
             )
 
@@ -249,7 +249,7 @@ def unblackliststicker(update: Update, context: CallbackContext):
     else:
         send_message(
             update.effective_message,
-            "Tell me what stickers you want to add to the blacklist.",
+            "Подскажите, какие стикеры вы хотите добавить в черный список.",
         )
 
 
@@ -314,7 +314,7 @@ def blacklist_mode(update: Update, context: CallbackContext):
         else:
             send_message(
                 update.effective_message,
-                "I only understand off/del/warn/ban/kick/mute/tban/tmute!",
+                "Я только понимаю off/del/warn/ban/kick/mute/tban/tmute!",
             )
             return
         if conn:
@@ -322,7 +322,7 @@ def blacklist_mode(update: Update, context: CallbackContext):
                 settypeblacklist, chat_name
             )
         else:
-            text = "Blacklist sticker mode changed, users will be `{}`!".format(
+            text = "Изменен режим стикеров черного списка, пользователи будут `{}`!".format(
                 settypeblacklist
             )
         send_message(update.effective_message, text, parse_mode="markdown")
@@ -358,7 +358,7 @@ def blacklist_mode(update: Update, context: CallbackContext):
                 settypeblacklist, chat_name
             )
         else:
-            text = "Blacklist sticker mode is currently set to *{}*.".format(
+            text = "В настоящий момент установлен режим стикеров из черного списка *{}*.".format(
                 settypeblacklist
             )
         send_message(update.effective_message, text, parse_mode=ParseMode.MARKDOWN)
