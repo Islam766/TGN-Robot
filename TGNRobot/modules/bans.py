@@ -163,18 +163,18 @@ def temp_ban(update: Update, context: CallbackContext) -> str:
     except BadRequest as excp:
         if excp.message != "":
             raise
-        message.reply_text("I can't seem to find this user.")
+        message.reply_text("Кажется, я не могу найти этого пользователя.")
         return log_message
     if user_id == bot.id:
-        message.reply_text("I'm not gonna BAN myself, are you crazy?")
+        message.reply_text("Я не выгоню себя!")
         return log_message
 
     if is_user_ban_protected(chat, user_id, member):
-        message.reply_text("I don't feel like it.")
+        message.reply_text("Я не чувствую этого.")
         return log_message
 
     if not reason:
-        message.reply_text("You haven't specified a time to ban this user for!")
+        message.reply_text("Вы не указали время для бана этого пользователя!!")
         return log_message
 
     split_reason = reason.split(None, 1)
@@ -208,7 +208,7 @@ def temp_ban(update: Update, context: CallbackContext) -> str:
         return log
 
     except BadRequest as excp:
-        if excp.message == "Reply message not found":
+        if excp.message == "Ответное сообщение не найдено":
             # Do not reply
             message.reply_text(
                 f"Banned! User will be banned for {time_val}.", quote=False
@@ -223,7 +223,7 @@ def temp_ban(update: Update, context: CallbackContext) -> str:
                 chat.id,
                 excp.message,
             )
-            message.reply_text("Well damn, I can't ban that user.")
+            message.reply_text("Черт возьми, я не могу забанить этого пользователя.")
 
     return log_message
 
@@ -244,23 +244,23 @@ def punch(update: Update, context: CallbackContext) -> str:
     user_id, reason = extract_user_and_text(message, args)
 
     if not user_id:
-        message.reply_text("I doubt that's a user.")
+        message.reply_text("Сомневаюсь, что это пользователь.")
         return log_message
 
     try:
         member = chat.get_member(user_id)
     except BadRequest as excp:
-        if excp.message != "User not found":
+        if excp.message != "Пользователь не найден":
             raise
 
-        message.reply_text("I can't seem to find this user.")
+        message.reply_text("Кажется, я не могу найти этого пользователя.")
         return log_message
     if user_id == bot.id:
-        message.reply_text("Yeahhh I'm not gonna do that.")
+        message.reply_text("Да я не буду этого делать.")
         return log_message
 
     if is_user_ban_protected(chat, user_id):
-        message.reply_text("I really wish I could punch this user....")
+        message.reply_text("Я действительно хотел бы забанить этого пользователя....")
         return log_message
 
     res = chat.unban_member(user_id)  # unban on current user = kick
@@ -283,7 +283,7 @@ def punch(update: Update, context: CallbackContext) -> str:
         return log
 
     else:
-        message.reply_text("Well damn, I can't punch that user.")
+        message.reply_text("Черт возьми, я не могу ударить этого пользователя.")
 
     return log_message
 
