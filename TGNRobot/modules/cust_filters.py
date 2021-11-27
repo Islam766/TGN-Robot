@@ -617,12 +617,11 @@ __help__ = """
  ❍ /filters*:* List all active filters saved in the chat.
 
 *Admin only:*
- ❍ /filter <keyword> <reply message>*:* Add a filter to this chat. The bot will now reply that message whenever 'keyword'\
-is mentioned. If you reply to a sticker with a keyword, the bot will reply with that sticker. NOTE: all filter \
-keywords are in lowercase. If you want your keyword to be a sentence, use quotes. eg: /filter "hey there" How you \
-doin?
- Separate diff replies by `%%%` to get random replies
- *Example:* 
+ ❍ /filter <keyword> <reply message>*:* Добавьте фильтр в этот чат. Теперь бот будет отвечать на это сообщение всякий раз, когда 'ключевое слово' \n
+упомянуто. Если вы ответите на наклейку с ключевым словом, бот ответит этой наклейкой. ПРИМЕЧАНИЕ: все фильтры \n
+ключевые слова в нижнем регистре. Если вы хотите, чтобы ваше ключевое слово было предложением, используйте кавычки. например: /filter "привет, 
+ Разделяйте ответы diff с помощью `%%%`, чтобы получить случайные ответы
+*Example:* 
  `/filter "filtername"
  Reply 1
  %%%
@@ -632,14 +631,14 @@ doin?
  ❍ /stop <filter keyword>*:* Stop that filter.
 
 *Chat creator only:*
- ❍ /removeallfilters*:* Remove all chat filters at once.
+ ❍ /removeallfilters*:* Удалить сразу все фильтры чата.
 
-*Note*: Filters also support markdown formatters like: {first}, {last} etc.. and buttons.
-Check ❍ /markdownhelp to know more!
+*Note*: Фильтры также поддерживают такие средства форматирования уценки, как: {first}, {last} и т. Д. И кнопки.
+Проверьте ❍ /markdownhelp, чтобы узнать больше!
 
 """
 
-__mod_name__ = "Filters"
+__mod_name__ = "Фильтры"
 
 FILTER_HANDLER = CommandHandler("filter", filters)
 STOP_HANDLER = CommandHandler("stop", stop_filter)
