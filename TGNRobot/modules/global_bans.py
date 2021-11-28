@@ -85,19 +85,19 @@ def gban(update: Update, context: CallbackContext):
 
     if not user_id:
         message.reply_text(
-            "You don't seem to be referring to a user or the ID specified is incorrect.."
+            "Похоже, вы не имеете в виду пользователя или указан неверный идентификатор.."
         )
         return
 
     if int(user_id) in DEV_USERS:
         message.reply_text(
-            "That user is part of the Association\nI can't act against our own."
+            "Этот пользователь является сотрудником компании BORZ \nЯ не могу действовать против наших собственных."
         )
         return
 
     if int(user_id) in DRAGONS:
         message.reply_text(
-            "I spy, with my little eye... a disaster! Why are you guys turning on each other?"
+            "Я шпионю своим глазком... катастрофа! Почему вы, ребята, включаете друг друга?"
         )
         return
 
@@ -108,39 +108,39 @@ def gban(update: Update, context: CallbackContext):
         return
 
     if int(user_id) in TIGERS:
-        message.reply_text("That's a Tiger! They cannot be banned!")
+        message.reply_text("Это тигр! Их нельзя запретить!")
         return
 
     if int(user_id) in WOLVES:
-        message.reply_text("That's a Wolf! They cannot be banned!")
+        message.reply_text("он BORZ! Их нельзя запретить!")
         return
 
     if user_id == bot.id:
-        message.reply_text("You uhh...want me to punch myself?")
+        message.reply_text("Ты... хочешь, чтобы я удалил себя?")
         return
 
     if user_id in [777000, 1087968824]:
-        message.reply_text("Fool! You can't attack Telegram's native tech!")
+        message.reply_text("Дурак! Вы не можете атаковать родную технологию Telegram!")
         return
 
     try:
         user_chat = bot.get_chat(user_id)
     except BadRequest as excp:
         if excp.message == "User not found":
-            message.reply_text("I can't seem to find this user.")
+            message.reply_text("Я не могу найти этого пользователя.")
             return ""
         else:
             return
 
     if user_chat.type != "private":
-        message.reply_text("That's not a user!")
+        message.reply_text("Это не пользователь!")
         return
 
     if sql.is_user_gbanned(user_id):
 
         if not reason:
             message.reply_text(
-                "This user is already gbanned; I'd change the reason, but you haven't given me one..."
+                "Этот пользователь уже заблокирован"
             )
             return
 
@@ -159,7 +159,7 @@ def gban(update: Update, context: CallbackContext):
 
         else:
             message.reply_text(
-                "This user is already gbanned, but had no reason set; I've gone and updated it!"
+                "Этот пользователь уже заблокирован, но для него не установлена ​​причина; Я пошел и обновил это!"
             )
 
         return
@@ -394,7 +394,7 @@ def gbanlist(update: Update, context: CallbackContext):
 
     if not banned_users:
         update.effective_message.reply_text(
-            "There aren't any gbanned users! You're kinder than I expected..."
+            "Нет пользователей с gban-аккаунтами! Ты добрее, чем я ожидал..."
         )
         return
 
@@ -487,13 +487,13 @@ def gbanstat(update: Update, context: CallbackContext):
         if args[0].lower() in ["on", "yes"]:
             sql.enable_gbans(update.effective_chat.id)
             update.effective_message.reply_text(
-                "Antispam is now enabled ✅ "
-                "I am now protecting your group from potential remote threats!"
+                "Антиспам включен ✅ "
+                "I am now  your group from potential remote threats!"
             )
         elif args[0].lower() in ["off", "no"]:
             sql.disable_gbans(update.effective_chat.id)
             update.effective_message.reply_text(
-                "Antispan is now disabled ❌ " "Spamwatch is now disabled ❌"
+                "Антиспам отключен ❌ " "Spamwatch отключен ❌"
             )
     else:
         update.effective_message.reply_text(
