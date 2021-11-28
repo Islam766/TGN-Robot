@@ -343,7 +343,7 @@ def remove_warn_filter(update: Update, context: CallbackContext):
             raise DispatcherHandlerStop
 
     msg.reply_text(
-        "That's not a current warning filter - run /warnlist for all active warning filters."
+        "Это не текущий фильтр предупреждений - run /warnlist для всех активных фильтров предупреждений."
     )
 
 
@@ -503,17 +503,18 @@ def __chat_settings__(chat_id, user_id):
 
 
 __help__ = """
- ❍ /warns <userhandle>*:* get a user's number, and reason, of warns.
- ❍ /warnlist*:* list of all current warning filters
+Команда варна даёт участнику беседы предупреждение за какой-то проступок. При достижении определённого количества (по умолчанию — 3) предупреждений к нему применяется наказание (кик, бан или что-то другое).
+
+ ✪ /warns <userhandle>*:* проверьте, сколько предупреждений имеет пользователь (и посмотрите причины, если таковые имеются).
+ ✪ /warnlist*:* Выводит список пользователей с варнами
 *Admins only:*
- ❍ /warn <userhandle>*:* warn a user. After 3 warns, the user will be banned from the group. Can also be used as a reply.
- ❍ /dwarn <userhandle>*:* warn a user and delete the message. After 3 warns, the user will be banned from the group. Can also be used as a reply.
- ❍ /resetwarn <userhandle>*:* reset the warns for a user. Can also be used as a reply.
- ❍ /addwarn <keyword> <reply message>*:* set a warning filter on a certain keyword. If you want your keyword to \
-be a sentence, encompass it with quotes, as such: `/addwarn "very angry" This is an angry user`.
- ❍ /nowarn <keyword>*:* stop a warning filter
- ❍ /warnlimit <num>*:* set the warning limit
- ❍ /strongwarn <on/yes/off/no>*:* If set to on, exceeding the warn limit will result in a ban. Else, will just punch.
+ ❍ /warn <userhandle>*:* предупредить пользователя. После 3 предупреждений пользователь будет забанен в группе. (Также может использоваться в качестве ответа.)
+ ❍ /dwarn <userhandle>*:* предупредить пользователя и удалить сообщение. После 3 предупреждений пользователь будет забанен в группе. (Также может использоваться в качестве ответа.)
+ ❍ /resetwarn <userhandle>*:* сбросить предупреждения для пользователя. Также может использоваться в качестве ответа.
+ ❍ /addwarn <keyword> <reply message>*:* установить фильтр предупреждений для определенного ключевого слова 
+ ❍ /nowarn <keyword>*:* остановить фильтр предупреждений
+ ❍ /warnlimit <num>*:* установить предел предупреждения
+ ❍ /strongwarn <on/yes/off/no>*:* Если этот параметр включен, превышение лимита предупреждений приведет к бану.
 """
 
 __mod_name__ = "Warns"
