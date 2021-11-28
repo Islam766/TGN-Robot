@@ -82,7 +82,7 @@ def ban(update: Update, context: CallbackContext) -> str:
         elif user_id in WOLVES:
             message.reply_text("Wolf abilities make them ban immune!")
         else:
-            message.reply_text("This user has immunity and cannot be banned.")
+            message.reply_text("У меня нет прав, чтобы забанить этого пользователя.")
         return log_message
     if message.text.startswith("/s"):
         silent = True
