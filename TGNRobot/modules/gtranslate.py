@@ -14,7 +14,7 @@ def totranslate(update: Update, context: CallbackContext) -> None:
     message = update.effective_message
     reply_msg = message.reply_to_message
     if not reply_msg:
-        message.reply_text("Reply to a message to translate it!")
+        message.reply_text("Ответьте на сообщение, чтобы перевести его!")
         return
     if reply_msg.caption:
         to_translate = reply_msg.caption
@@ -41,7 +41,7 @@ def totranslate(update: Update, context: CallbackContext) -> None:
 
 def languages(update: Update, context: CallbackContext) -> None:
     update.effective_message.reply_text(
-        "Click on the button below to see the list of supported language codes.",
+        "Нажмите кнопку ниже, чтобы просмотреть список поддерживаемых языковых кодов..",
         reply_markup=InlineKeyboardMarkup(
             [
                 [
