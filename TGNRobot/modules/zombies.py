@@ -55,7 +55,7 @@ async def zombies(event):
 
     con = event.pattern_match.group(1).lower()
     del_u = 0
-    del_status = "No Deleted Accounts Found, Group Is Clean."
+    del_status = "Удаленных аккаунтов не обнаружено, группа чистая."
 
     if con != "clean":
         find_zombies = await event.respond("Searching For Zombies...")
@@ -81,10 +81,10 @@ async def zombies(event):
         return
 
     if not admin and not creator:
-        await event.respond("I Am Not An Admin Here!")
+        await event.respond("Я здесь не админ!")
         return
 
-    cleaning_zombies = await event.respond("Cleaning Zombies...")
+    cleaning_zombies = await event.respond("Очистка зомби...")
     del_u = 0
     del_a = 0
 
