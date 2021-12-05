@@ -19,7 +19,7 @@ from TGNRobot import pbot
 GENIUS = get_str_key("GENIUS_API_TOKEN", None)
 
 
-@pbot.on_message(filters.command(["vsong", "video"]))
+@pbot.on_message(filters.command(["jjj", "jjj"]))
 async def ytmusic(client, message: Message):
     urlissed = get_text(message)
 
@@ -84,7 +84,7 @@ async def ytmusic(client, message: Message):
             os.remove(files)
 
 
-@pbot.on_message(filters.command(["music", "song"]))
+@pbot.on_message(filters.command(["kkkkk", "kkkk"]))
 async def ytmusic(client, message: Message):
     urlissed = get_text(message)
     if not urlissed:
