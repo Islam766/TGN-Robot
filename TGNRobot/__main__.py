@@ -73,32 +73,38 @@ def get_readable_time(seconds: int) -> str:
     return ping_time
 
 
-PM_START_TEXT = f"""
-*Hellow There, I'm Anki Vector 🍑
-I'm a Powerfull group manager bot With Cool Modules. Made My @TeamAnkiVector
-hit /help to Find my list of available commands 🕹*
+PM_START_TEXT = """
+BORZ поможет модерировать ваши чаты!
+
+Добавьте бота в ваш чат и выдайте права администратора. /help
+ [⚜️](https://telegra.ph/file/cab6825dea9263d347831.jpg)
 """
 
 buttons = [
     [
-        InlineKeyboardButton(text="📌Updates Channel", url="https://t.me/ankivectorUpdates"),
-        InlineKeyboardButton(text="🖲 Support Group", url="https://t.me/AnkiSupport_Official"),
-    ],
-    [
-        InlineKeyboardButton(text="📜 Source Code", url="https://www.youtube.com/watch?v=fXXEcAkWAFU"),
-        InlineKeyboardButton(text="❔ Help", callback_data="help_back"),
-    ],
-    [
         InlineKeyboardButton(
-            text="➕ Add Anki Vector To Youre Group ➕", url="t.me/TheAnkiVectorbot?startgroup=true"
+            text="Добавить бота в чат", url="t.me/islam95_bot?startgroup=true"),
+    ],
+    [
+        InlineKeyboardButton(text="помощник 💫", url=f"t.me/B0RZ7"),
+        InlineKeyboardButton(
+            text="Канал ⚡", url=f"https://t.me/TeamBORZ95"
         ),
     ],
-
-TGNRobot_STICKER = "CAACAgUAAxkBAAEEwKthkPVBp6d5T4S3dlYZM3L8BkXRNAACOAQAAryviVQbCLI09PvjAAEiBA"
+    [
+        InlineKeyboardButton(text="☑️", url=f"https://t.me/isIam07"),
+        InlineKeyboardButton(
+            text="⚜️", url=f"https://t.me/isIam07"
+        ),
+    ],
+    [
+        InlineKeyboardButton(text="ʜᴇʟᴘ ᴀɴᴅ ᴄᴏᴍᴍᴀɴᴅꜱ", callback_data="help_back"),
+    ],
+]
 
 
 HELP_STRINGS = """
-(https://telegra.ph/file/cab6825dea9263d347831.jpg)"""
+ [⚜️](https://telegra.ph/file/cab6825dea9263d347831.jpg)"""
 
 START_IMG = "https://telegra.ph/file/cab6825dea9263d347831.jpg"
 
