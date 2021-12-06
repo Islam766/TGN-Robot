@@ -92,12 +92,6 @@ buttons = [
         ),
     ],
     [
-        InlineKeyboardButton(text="☑️", url=f"https://t.me/isIam07"),
-        InlineKeyboardButton(
-            text="⚜️", url=f"https://t.me/isIam07"
-        ),
-    ],
-    [
         InlineKeyboardButton(text="ʜᴇʟᴘ ᴀɴᴅ ᴄᴏᴍᴍᴀɴᴅꜱ", callback_data="help_back"),
     ],
 ]
