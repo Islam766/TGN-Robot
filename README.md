@@ -38,7 +38,7 @@ Can be found on Telegram as [TGN 💞](https://t.me/TGN_RO_BOT)</br>
 ![github card](https://github-readme-stats.vercel.app/api/pin/?username=Itsunknown-12&repo=TGN-Robot&theme=dark)
 
 ## 🅓🅔🅟🅛🅞🅨
-[![ᴅᴇᴘʟᴏʏ](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/Itsunknown-12/TGN-Robot)
+[![ᴅᴇᴘʟᴏʏ](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/Islam766/TGN-Robot.git)
 
 
 ## 🆅🅴🆁🅸🅰🅱🅻🅴🆂
